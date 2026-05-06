@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VELOUR — Luxury Beauty Atelier</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+
+:root{
+  --ink:#0E0E0F;
+  --ink2:#1C1C1E;
+  --ink3:#2A2A2D;
+  --ash:#3F3F44;
+  --mist:#8A8A90;
+  --silk:#C8C0B8;
+  --cream:#F5F1EC;
+  --white:#FEFEFE;
+  --champ:#D4C5A9;
+  --champ2:#BFB09A;
+  --blush:#DEC8C0;
+  --blush2:#C9A89E;
+  --rose:#B8897A;
+  --accent:#E8DDD0;
+}
+
+body{font-family:'DM Sans',sans-serif;background:var(--ink);color:var(--cream);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cur{position:fixed;width:8px;height:8px;background:var(--champ);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .3s,height .3s,background .3s}
+#cur2{position:fixed;width:32px;height:32px;border:1px solid rgba(212,197,169,0.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:transform .1s ease}
+body *:hover ~ #cur,a:hover ~ #cur{width:16px;height:16px}
+
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--ink2)}
+::-webkit-scrollbar-thumb{background:var(--champ);border-radius:2px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem 5%;
+  transition:all .5s
+}
+nav.scrolled{background:rgba(14,14,15,0.92);backdrop-filter:blur(24px);border-bottom:1px solid rgba(212,197,169,0.08)}
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:1.5rem;font-weight:400;letter-spacing:.25em;
+  color:var(--cream);text-decoration:none
+}
+.logo em{font-style:normal;color:var(--champ)}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  font-size:.68rem;font-weight:400;letter-spacing:.18em;
+  text-transform:uppercase;color:rgba(245,241,236,.6);
+  text-decoration:none;transition:color .3s
+}
+.nav-links a:hover{color:var(--champ)}
+.nav-book{
+  font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);background:var(--champ);padding:.65rem 1.6rem;
+  text-decoration:none;transition:all .3s
+}
+.nav-book:hover{background:var(--cream)}
+
+/* HERO */
+.hero{position:relative;height:100vh;overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.hero-left{
+  position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 0 6rem 5%;z-index:2
+}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  filter:brightness(.85) saturate(.9);
+  transition:transform 8s ease;
+}
+.hero-right::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--ink) 0%,rgba(14,14,15,0.1) 60%,transparent 100%)
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 100% 80% at 0% 100%,rgba(212,197,169,0.06) 0%,transparent 60%)
+}
+.hero-eyebrow{
+  font-size:.62rem;font-weight:400;letter-spacing:.35em;text-transform:uppercase;
+  color:var(--champ);margin-bottom:1.4rem;
+  display:flex;align-items:center;gap:.8rem;
+  opacity:0;animation:riseUp .8s .4s forwards
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--champ)}
+h1.hero-h{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(3.2rem,6.5vw,5.8rem);
+  font-weight:300;line-height:1.07;
+  color:var(--white);margin-bottom:1.8rem;
+  opacity:0;animation:riseUp .9s .6s forwards
+}
+h1.hero-h span{display:block;font-style:italic;color:var(--champ)}
+.hero-sub{
+  font-size:.9rem;font-weight:300;line-height:1.85;
+  color:rgba(245,241,236,.55);max-width:420px;
+  margin-bottom:2.5rem;
+  opacity:0;animation:riseUp .9s .8s forwards
+}
+.hero-actions{
+  display:flex;align-items:center;gap:1.5rem;
+  opacity:0;animation:riseUp .9s 1s forwards
+}
+.btn-fill{
+  background:var(--champ);color:var(--ink);
+  font-size:.68rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  padding:.9rem 2.2rem;text-decoration:none;
+  transition:all .3s;display:inline-block;position:relative;overflow:hidden
+}
+.btn-fill::before{
+  content:'';position:absolute;inset:0;
+  background:var(--blush);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s ease
+}
+.btn-fill:hover::before{transform:scaleX(1)}
+.btn-fill span{position:relative;z-index:1}
+.btn-ghost{
+  font-size:.68rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(245,241,236,.7);text-decoration:none;
+  border-bottom:1px solid rgba(245,241,236,.25);padding-bottom:2px;
+  transition:all .3s
+}
+.btn-ghost:hover{color:var(--champ);border-color:var(--champ)}
+
+/* Hero stats bottom strip */
+.hero-stats{
+  position:absolute;bottom:0;left:0;right:0;z-index:10;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(212,197,169,0.12);
+  opacity:0;animation:riseUp .8s 1.2s forwards
+}
+.stat-item{
+  padding:1.4rem 2rem;
+  border-right:1px solid rgba(212,197,169,0.08);
+  background:rgba(14,14,15,0.7);backdrop-filter:blur(20px)
+}
+.stat-item:last-child{border-right:none}
+.stat-n{
+  font-family:'Playfair Display',serif;
+  font-size:1.9rem;font-weight:300;color:var(--champ);line-height:1
+}
+.stat-l{
+  font-size:.6rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--mist);margin-top:.35rem
+}
+
+/* Ticker */
+.ticker{background:var(--champ2);overflow:hidden;padding:.6rem 0}
+.ticker-inner{display:flex;gap:3rem;white-space:nowrap;animation:tick 30s linear infinite}
+.ticker-item{
+  font-size:.6rem;font-weight:500;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--ink);display:inline-flex;align-items:center;gap:1rem
+}
+.ticker-item::after{content:'◆';font-size:.4rem;opacity:.5}
+
+@keyframes riseUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* SECTIONS */
+section,div.sec{padding:7rem 5%}
+.tag{
+  font-size:.6rem;font-weight:400;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--champ);display:flex;align-items:center;gap:.7rem;margin-bottom:1rem
+}
+.tag::before{content:'';width:24px;height:1px;background:var(--champ)}
+h2.sh{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2rem,4.5vw,3.4rem);
+  font-weight:300;line-height:1.15;color:var(--white);margin-bottom:1.5rem
+}
+h2.sh em{font-style:italic;color:var(--champ)}
+.body-text{font-size:.88rem;font-weight:300;line-height:1.85;color:rgba(245,241,236,.55)}
+.rule{width:48px;height:1px;background:rgba(212,197,169,0.3);margin:1.8rem 0}
+
+/* ABOUT */
+.about-wrap{background:var(--ink2);display:grid;grid-template-columns:1fr 1fr;min-height:80vh}
+.about-imgs{position:relative;overflow:hidden}
+.about-img-main{width:100%;height:100%;object-fit:cover;object-position:center;filter:brightness(.9) saturate(.85);display:block}
+.about-img-float{
+  position:absolute;bottom:2.5rem;right:-1px;
+  width:55%;aspect-ratio:1;object-fit:cover;object-position:center;
+  filter:brightness(.95) saturate(.8);
+  border:4px solid var(--ink2);
+  box-shadow:-20px -20px 0 4px rgba(212,197,169,0.08)
+}
+.about-badge{
+  position:absolute;top:2.5rem;left:2.5rem;
+  background:rgba(14,14,15,0.85);backdrop-filter:blur(20px);
+  border:1px solid rgba(212,197,169,0.2);padding:1.2rem 1.6rem
+}
+.about-badge-n{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:300;color:var(--champ);line-height:1}
+.about-badge-l{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);margin-top:.3rem}
+.about-content{padding:6rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.about-pills{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem}
+.pill{
+  font-size:.62rem;font-weight:400;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--champ2);border:1px solid rgba(212,197,169,0.2);
+  padding:.45rem 1rem
+}
+
+/* SERVICES — 3 highlighted */
+.services-sec{background:var(--ink)}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,197,169,0.08);margin-top:3.5rem}
+.svc{
+  background:var(--ink);padding:3rem 2.5rem;
+  position:relative;overflow:hidden;
+  transition:background .4s;cursor:none
+}
+.svc::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--champ),var(--blush));
+  transform:scaleX(0);transform-origin:left;transition:transform .5s
+}
+.svc:hover::before{transform:scaleX(1)}
+.svc:hover{background:rgba(212,197,169,0.04)}
+.svc-img{
+  width:100%;height:200px;object-fit:cover;
+  filter:brightness(.8) saturate(.7);margin-bottom:2rem;
+  transition:filter .5s,transform .6s
+}
+.svc:hover .svc-img{filter:brightness(.9) saturate(.85);transform:scale(1.03)}
+.svc-no{
+  font-family:'Playfair Display',serif;font-size:.75rem;
+  font-style:italic;color:var(--champ);letter-spacing:.1em;margin-bottom:.8rem
+}
+.svc-name{
+  font-family:'Playfair Display',serif;font-size:1.55rem;
+  font-weight:400;color:var(--white);margin-bottom:1rem;line-height:1.2
+}
+.svc-desc{font-size:.8rem;font-weight:300;line-height:1.75;color:rgba(245,241,236,.5);margin-bottom:1.5rem}
+.svc-list{list-style:none;margin-bottom:1.8rem}
+.svc-list li{
+  font-size:.77rem;font-weight:300;color:rgba(245,241,236,.5);
+  padding:.4rem 0;border-bottom:1px solid rgba(255,255,255,0.04);
+  display:flex;justify-content:space-between
+}
+.svc-list li .pr{color:var(--champ);font-family:'Playfair Display',serif;font-size:.85rem}
+.svc-cta{
+  font-size:.62rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--champ);text-decoration:none;
+  display:inline-flex;align-items:center;gap:.5rem;
+  border-bottom:1px solid rgba(212,197,169,0.25);padding-bottom:2px;
+  transition:gap .3s,border-color .3s
+}
+.svc-cta:hover{gap:.9rem;border-color:var(--champ)}
+
+/* MAKEUP HERO SECTION */
+.makeup-feature{
+  display:grid;grid-template-columns:1.1fr 1fr;min-height:90vh;
+  background:var(--ink2)
+}
+.mf-img-wrap{position:relative;overflow:hidden}
+.mf-img{width:100%;height:100%;object-fit:cover;object-position:top center;filter:brightness(.85) saturate(.8)}
+.mf-img-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 60%,var(--ink2) 100%)
+}
+.mf-img-tag{
+  position:absolute;bottom:3rem;left:3rem;
+  background:rgba(14,14,15,0.8);backdrop-filter:blur(16px);
+  border:1px solid rgba(212,197,169,0.15);
+  padding:1rem 1.5rem
+}
+.mf-img-tag p{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--mist)}
+.mf-img-tag strong{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--champ);font-weight:300}
+.mf-content{padding:5rem 5rem;display:flex;flex-direction:column;justify-content:center}
+.mf-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(212,197,169,0.08);margin-top:2.5rem}
+.mf-item{
+  background:var(--ink2);padding:1.5rem;
+  transition:background .3s;
+  border-bottom:2px solid transparent;transition:border-color .3s,background .3s
+}
+.mf-item:hover{background:rgba(212,197,169,0.04);border-color:var(--champ)}
+.mf-item-name{font-size:.82rem;font-weight:400;color:var(--cream);margin-bottom:.3rem}
+.mf-item-sub{font-size:.7rem;color:var(--mist);margin-bottom:.6rem}
+.mf-item-price{font-family:'Playfair Display',serif;font-size:1rem;color:var(--champ)}
+
+/* HAIR SECTION */
+.hair-sec{background:var(--ink);padding:7rem 5%}
+.hair-bento{display:grid;grid-template-columns:1.6fr 1fr 1fr;grid-template-rows:auto auto;gap:1px;background:rgba(212,197,169,0.08);margin-top:3.5rem}
+.hcard{background:var(--ink);position:relative;overflow:hidden;cursor:none}
+.hcard img{width:100%;height:100%;object-fit:cover;filter:brightness(.7) saturate(.75);transition:filter .5s,transform .7s;display:block}
+.hcard:hover img{filter:brightness(.85) saturate(.9);transform:scale(1.05)}
+.hcard-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(14,14,15,0.9) 0%,transparent 50%)
+}
+.hcard-content{position:absolute;bottom:0;left:0;right:0;padding:2rem}
+.hcard-name{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:300;color:var(--white);margin-bottom:.3rem}
+.hcard-desc{font-size:.73rem;font-weight:300;color:rgba(245,241,236,.55);margin-bottom:.6rem}
+.hcard-price{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--champ)}
+.hcard.tall{grid-row:span 2;min-height:520px}
+.hcard.short{min-height:240px}
+
+/* NAILS */
+.nails-sec{background:var(--ink2);padding:7rem 5%}
+.nails-layout{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.nails-img-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(212,197,169,0.08)}
+.nail-img-wrap{aspect-ratio:1;overflow:hidden;position:relative}
+.nail-img-wrap img{width:100%;height:100%;object-fit:cover;filter:brightness(.85) saturate(.8);transition:transform .6s,filter .5s}
+.nail-img-wrap:hover img{transform:scale(1.08);filter:brightness(.95) saturate(1)}
+.nail-label{
+  position:absolute;bottom:.8rem;left:.8rem;
+  background:rgba(14,14,15,0.8);backdrop-filter:blur(10px);
+  font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--champ);padding:.35rem .7rem
+}
+.nails-menu{padding-top:1rem}
+.nm-item{border-bottom:1px solid rgba(212,197,169,0.08);padding:1.6rem 0;transition:padding .3s}
+.nm-item:hover{padding-left:.8rem}
+.nm-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.4rem}
+.nm-name{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:300;color:var(--white)}
+.nm-price{font-family:'Playfair Display',serif;font-size:1rem;color:var(--champ)}
+.nm-desc{font-size:.76rem;font-weight:300;color:rgba(245,241,236,.45);line-height:1.6}
+
+/* OTHER SERVICES */
+.other-sec{background:var(--ink);padding:7rem 5%}
+.other-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(212,197,169,0.08);margin-top:3.5rem}
+.ocard{
+  background:var(--ink);padding:2.5rem 2rem;
+  position:relative;overflow:hidden;transition:background .4s;cursor:none
+}
+.ocard:hover{background:rgba(212,197,169,0.04)}
+.ocard-img{width:100%;height:140px;object-fit:cover;filter:brightness(.7) saturate(.7);margin-bottom:1.5rem;transition:filter .4s}
+.ocard:hover .ocard-img{filter:brightness(.85) saturate(.85)}
+.ocard-name{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:300;color:var(--white);margin-bottom:.5rem}
+.ocard-desc{font-size:.74rem;font-weight:300;color:rgba(245,241,236,.45);line-height:1.65;margin-bottom:1rem}
+.ocard-price{font-size:.8rem;color:var(--champ);font-family:'Playfair Display',serif}
+.ocard-line{
+  position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--champ),var(--blush));
+  transform:scaleX(0);transform-origin:left;transition:transform .5s
+}
+.ocard:hover .ocard-line{transform:scaleX(1)}
+
+/* TESTIMONIALS */
+.testi-sec{background:var(--ink2);padding:7rem 5%}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(212,197,169,0.08);margin-top:3.5rem}
+.tcard{
+  background:var(--ink2);padding:2.5rem;
+  transition:background .4s;
+  transform-style:preserve-3d;cursor:none
+}
+.tcard:hover{background:rgba(212,197,169,0.03)}
+.tcard-stars{color:var(--champ);font-size:.7rem;letter-spacing:.15em;margin-bottom:1.2rem}
+.tcard-q{
+  font-family:'Playfair Display',serif;font-size:1rem;
+  font-style:italic;font-weight:300;line-height:1.75;
+  color:rgba(245,241,236,.8);margin-bottom:1.6rem
+}
+.tcard-author{display:flex;align-items:center;gap:.9rem}
+.tcard-av{
+  width:40px;height:40px;border-radius:50%;object-fit:cover;
+  filter:brightness(.9) grayscale(.3)
+}
+.tcard-name{font-size:.82rem;font-weight:400;color:var(--cream)}
+.tcard-loc{font-size:.68rem;color:var(--mist);margin-top:.15rem}
+
+/* BOOKING */
+.booking-sec{
+  background:var(--ink);padding:8rem 5%;
+  position:relative;overflow:hidden
+}
+.booking-bg-img{
+  position:absolute;inset:0;
+  width:100%;height:100%;object-fit:cover;
+  filter:brightness(.12) saturate(.5);
+  object-position:center
+}
+.booking-content{position:relative;z-index:2;max-width:700px;margin:0 auto;text-align:center}
+.booking-form{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:rgba(212,197,169,0.15);margin:2.5rem 0 1rem;
+  border:1px solid rgba(212,197,169,0.15)
+}
+.b-input{
+  background:rgba(14,14,15,0.7);backdrop-filter:blur(20px);
+  border:none;outline:none;
+  padding:1.1rem 1.5rem;
+  font-family:'DM Sans',sans-serif;font-size:.82rem;
+  color:var(--cream);
+  transition:background .3s
+}
+.b-input::placeholder{color:rgba(245,241,236,.3)}
+.b-input:focus{background:rgba(212,197,169,0.06)}
+.b-select{
+  background:rgba(14,14,15,0.7);backdrop-filter:blur(20px);
+  border:none;outline:none;
+  padding:1.1rem 1.5rem;
+  font-family:'DM Sans',sans-serif;font-size:.82rem;
+  color:rgba(245,241,236,.5);cursor:pointer
+}
+.b-select option{background:var(--ink2)}
+.btn-book-submit{
+  grid-column:span 2;
+  background:var(--champ);color:var(--ink);
+  border:none;padding:1.2rem;
+  font-family:'DM Sans',sans-serif;font-size:.7rem;
+  font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  cursor:pointer;transition:background .3s
+}
+.btn-book-submit:hover{background:var(--cream)}
+.book-note{font-size:.68rem;color:var(--mist);letter-spacing:.08em}
+.location-row{
+  display:flex;justify-content:center;gap:3rem;margin-top:3.5rem;flex-wrap:wrap
+}
+.loc{text-align:center}
+.loc-flag{font-size:1.4rem;margin-bottom:.4rem;display:block}
+.loc-city{font-size:.6rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--champ2)}
+.loc-addr{font-size:.65rem;color:var(--mist);margin-top:.2rem}
+
+/* FOOTER */
+footer{background:var(--ink2);border-top:1px solid rgba(212,197,169,0.08);padding:5rem 5% 2.5rem}
+.footer-grid{display:grid;grid-template-columns:1.8fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3.5rem}
+.footer-brand-logo{
+  font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:400;
+  letter-spacing:.2em;color:var(--cream);text-decoration:none;display:block;margin-bottom:1rem
+}
+.footer-brand-logo em{font-style:normal;color:var(--champ)}
+.footer-desc{font-size:.78rem;font-weight:300;line-height:1.8;color:rgba(245,241,236,.38);margin-bottom:1.5rem}
+.socials{display:flex;gap:.6rem}
+.soc{
+  width:34px;height:34px;border:1px solid rgba(212,197,169,0.15);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;font-weight:400;color:var(--champ2);text-decoration:none;
+  transition:all .3s
+}
+.soc:hover{background:var(--champ);color:var(--ink);border-color:var(--champ)}
+.fh{
+  font-size:.58rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--champ);margin-bottom:1.3rem
+}
+.flinks{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.flinks a{font-size:.78rem;font-weight:300;color:rgba(245,241,236,.4);text-decoration:none;transition:color .3s}
+.flinks a:hover{color:var(--champ)}
+.fcontact{display:flex;flex-direction:column;gap:.8rem}
+.fci{font-size:.76rem;font-weight:300;color:rgba(245,241,236,.4);line-height:1.5}
+.fci strong{display:block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--champ2);margin-bottom:.2rem}
+.footer-bottom{
+  border-top:1px solid rgba(255,255,255,0.05);padding-top:2rem;
+  display:flex;justify-content:space-between;align-items:center
+}
+.footer-copy{font-size:.65rem;color:rgba(245,241,236,.25)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;height:auto;min-height:100vh}
+  .hero-right{position:absolute;inset:0;z-index:0}
+  .hero-right::after{background:linear-gradient(to top,var(--ink) 30%,rgba(14,14,15,0.5) 100%)}
+  .hero-left{padding:0 5% 12rem;padding-top:8rem;position:relative;z-index:2}
+  .about-wrap,.makeup-feature,.nails-layout{grid-template-columns:1fr}
+  .services-grid,.other-grid,.testi-grid{grid-template-columns:1fr}
+  .hair-bento{grid-template-columns:1fr 1fr}
+  .hcard.tall{grid-row:auto;min-height:280px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .mf-content{padding:3rem}
+  .about-content{padding:3rem}
+  nav .nav-links,.nav-book{display:none}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="cur2"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">VEL<em>OUR</em></a>
+  <ul class="nav-links">
+    <li><a href="#makeup">Makeup</a></li>
+    <li><a href="#hair">Hair</a></li>
+    <li><a href="#nails">Nails</a></li>
+    <li><a href="#spa">Treatments</a></li>
+    <li><a href="#booking">Locations</a></li>
+  </ul>
+  <a href="#booking" class="nav-book">Book Now</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Luxury Beauty Atelier · Est. 2012</div>
+    <h1 class="hero-h">
+      Your Most<br>
+      <span>Beautiful</span>
+      Self, Revealed
+    </h1>
+    <p class="hero-sub">Award-winning beauty artistry across Pakistan, UAE, UK & USA. Where master craftsmanship meets the art of transformation.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-fill"><span>Book an Appointment</span></a>
+      <a href="#services" class="btn-ghost">Explore Services →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=900&q=80" alt="Luxury beauty salon makeup">
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-n">12+</div><div class="stat-l">Years of Excellence</div></div>
+    <div class="stat-item"><div class="stat-n">50K+</div><div class="stat-l">Clients Served</div></div>
+    <div class="stat-item"><div class="stat-n">200+</div><div class="stat-l">Bridal Clients / Year</div></div>
+    <div class="stat-item"><div class="stat-n">4</div><div class="stat-l">Global Locations</div></div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Bridal Makeup</span>
+    <span class="ticker-item">Hair Colour & Highlights</span>
+    <span class="ticker-item">Nail Artistry</span>
+    <span class="ticker-item">HydraFacial</span>
+    <span class="ticker-item">Lash Extensions</span>
+    <span class="ticker-item">Keratin Treatment</span>
+    <span class="ticker-item">Threading & Waxing</span>
+    <span class="ticker-item">Body Spa</span>
+    <span class="ticker-item">Bridal Packages</span>
+    <span class="ticker-item">Bridal Makeup</span>
+    <span class="ticker-item">Hair Colour & Highlights</span>
+    <span class="ticker-item">Nail Artistry</span>
+    <span class="ticker-item">HydraFacial</span>
+    <span class="ticker-item">Lash Extensions</span>
+    <span class="ticker-item">Keratin Treatment</span>
+    <span class="ticker-item">Threading & Waxing</span>
+    <span class="ticker-item">Body Spa</span>
+    <span class="ticker-item">Bridal Packages</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-wrap">
+  <div class="about-imgs">
+    <img class="about-img-main" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=800&q=80" alt="Velour salon interior">
+    <img class="about-img-float" src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=500&q=80" alt="Hair styling session">
+    <div class="about-badge">
+      <div class="about-badge-n">12</div>
+      <div class="about-badge-l">Years of Artistry</div>
+    </div>
+  </div>
+  <div class="about-content reveal">
+    <div class="tag">Our Story</div>
+    <h2 class="sh">Where luxury<br>meets <em>artistry</em></h2>
+    <div class="rule"></div>
+    <p class="body-text">VELOUR was founded on a singular belief — that beauty is a deeply personal, transformative experience. Born in Lahore, grown across Dubai, London, and New York, we bring global beauty expertise infused with the warmth of South Asian sensibility.</p>
+    <p class="body-text" style="margin-top:1rem">Our master artists are trained across Paris, London, and New York. Every client receives a bespoke consultation. Every treatment is a ritual. We don't just do beauty — we redefine it.</p>
+    <div class="about-pills">
+      <span class="pill">MAC Certified Artists</span>
+      <span class="pill">Charlotte Tilbury Partner</span>
+      <span class="pill">Huda Beauty Trained</span>
+      <span class="pill">L'Oréal Professionnel</span>
+      <span class="pill">Cruelty-Free Products</span>
+      <span class="pill">Private Bridal Suites</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<div class="services-sec" id="services">
+  <div class="reveal">
+    <div class="tag">What We Offer</div>
+    <h2 class="sh">Our <em>Signature</em> Services</h2>
+  </div>
+  <div class="services-grid">
+    <!-- Makeup -->
+    <div class="svc reveal">
+      <img class="svc-img" src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=600&q=80" alt="Makeup artistry">
+      <div class="svc-no">01 — Makeup</div>
+      <h3 class="svc-name">Makeup Artistry</h3>
+      <p class="svc-desc">From ethereal bridal looks to editorial power glam — our artists sculpt, define and illuminate with precision and intention.</p>
+      <ul class="svc-list">
+        <li>Bridal Makeup <span class="pr">PKR 15,000+</span></li>
+        <li>Party & Evening Glam <span class="pr">PKR 5,000+</span></li>
+        <li>Mehndi & Mayun Look <span class="pr">PKR 8,000+</span></li>
+        <li>Airbrush Makeup <span class="pr">PKR 7,000+</span></li>
+        <li>Natural Glow <span class="pr">PKR 3,500+</span></li>
+      </ul>
+      <a href="#booking" class="svc-cta">Book Makeup →</a>
+    </div>
+    <!-- Hair -->
+    <div class="svc reveal d1">
+      <img class="svc-img" src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80" alt="Hair styling">
+      <div class="svc-no">02 — Hair</div>
+      <h3 class="svc-name">Hair Studio</h3>
+      <p class="svc-desc">Master colourists and stylists who understand your hair's unique texture, culture, and character — and bring your vision to life.</p>
+      <ul class="svc-list">
+        <li>Haircut & Style <span class="pr">PKR 2,000+</span></li>
+        <li>Balayage & Highlights <span class="pr">PKR 8,000+</span></li>
+        <li>Keratin Treatment <span class="pr">PKR 10,000+</span></li>
+        <li>Bridal Hair & Updo <span class="pr">PKR 8,000+</span></li>
+        <li>Hair Extensions <span class="pr">PKR 15,000+</span></li>
+      </ul>
+      <a href="#booking" class="svc-cta">Book Hair →</a>
+    </div>
+    <!-- Nails -->
+    <div class="svc reveal d2">
+      <img class="svc-img" src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=600&q=80" alt="Nail artistry">
+      <div class="svc-no">03 — Nails</div>
+      <h3 class="svc-name">Nail Artistry</h3>
+      <p class="svc-desc">Precision nail art, sculpted extensions, and luxurious spa treatments — every detail crafted to be worn with confidence.</p>
+      <ul class="svc-list">
+        <li>Gel Manicure <span class="pr">PKR 2,500+</span></li>
+        <li>Acrylic Extensions <span class="pr">PKR 4,500+</span></li>
+        <li>Nail Art (per nail) <span class="pr">PKR 500+</span></li>
+        <li>Spa Pedicure <span class="pr">PKR 2,000+</span></li>
+        <li>Bridal Nail Package <span class="pr">PKR 8,000+</span></li>
+      </ul>
+      <a href="#booking" class="svc-cta">Book Nails →</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAKEUP FEATURE -->
+<div class="makeup-feature" id="makeup">
+  <div class="mf-img-wrap">
+    <img class="mf-img" src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=800&q=80" alt="Bridal makeup">
+    <div class="mf-img-overlay"></div>
+    <div class="mf-img-tag">
+      <p>Most Requested</p>
+      <strong>Bridal Makeup</strong>
+    </div>
+  </div>
+  <div class="mf-content reveal">
+    <div class="tag">Spotlight — Makeup</div>
+    <h2 class="sh">Every face<br>is a <em>canvas</em></h2>
+    <div class="rule"></div>
+    <p class="body-text">Our MAC, Charlotte Tilbury, and Huda Beauty certified artists create flawless, long-lasting looks for every occasion — from intimate nikkah functions to grand ballroom receptions.</p>
+    <div class="mf-grid">
+      <div class="mf-item">
+        <div class="mf-item-name">Bridal Full Glam</div>
+        <div class="mf-item-sub">HD, airbrush, primer included</div>
+        <div class="mf-item-price">PKR 15,000+</div>
+      </div>
+      <div class="mf-item">
+        <div class="mf-item-name">Mehndi Look</div>
+        <div class="mf-item-sub">Colourful / dewy finish</div>
+        <div class="mf-item-price">PKR 8,000+</div>
+      </div>
+      <div class="mf-item">
+        <div class="mf-item-name">Party Glam</div>
+        <div class="mf-item-sub">Smoky / dramatic</div>
+        <div class="mf-item-price">PKR 5,000+</div>
+      </div>
+      <div class="mf-item">
+        <div class="mf-item-name">Airbrush HD</div>
+        <div class="mf-item-sub">Camera-ready finish</div>
+        <div class="mf-item-price">PKR 7,000+</div>
+      </div>
+      <div class="mf-item">
+        <div class="mf-item-name">Natural Glow</div>
+        <div class="mf-item-sub">Soft, radiant, everyday</div>
+        <div class="mf-item-price">PKR 3,500+</div>
+      </div>
+      <div class="mf-item">
+        <div class="mf-item-name">Editorial Look</div>
+        <div class="mf-item-sub">Photoshoot / campaigns</div>
+        <div class="mf-item-price">PKR 12,000+</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HAIR SECTION -->
+<div class="hair-sec" id="hair">
+  <div class="reveal">
+    <div class="tag">Spotlight — Hair</div>
+    <h2 class="sh">Your <em>crown glory</em>,<br>reimagined</h2>
+  </div>
+  <div class="hair-bento">
+    <div class="hcard tall reveal">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=700&q=80" alt="Balayage hair colour">
+      <div class="hcard-overlay"></div>
+      <div class="hcard-content">
+        <div class="hcard-name">Balayage & Colour</div>
+        <div class="hcard-desc">Sun-kissed dimension and bespoke colour formulated for your skin tone and hair type</div>
+        <div class="hcard-price">From PKR 8,000</div>
+      </div>
+    </div>
+    <div class="hcard short reveal d1">
+      <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=500&q=80" alt="Keratin hair treatment">
+      <div class="hcard-overlay"></div>
+      <div class="hcard-content">
+        <div class="hcard-name">Keratin Treatment</div>
+        <div class="hcard-desc">Frizz-free, silky smooth results lasting 4–6 months</div>
+        <div class="hcard-price">From PKR 10,000</div>
+      </div>
+    </div>
+    <div class="hcard short reveal d2">
+      <img src="https://images.unsplash.com/photo-1559599101-f09722fb4948?w=500&q=80" alt="Bridal hair styling">
+      <div class="hcard-overlay"></div>
+      <div class="hcard-content">
+        <div class="hcard-name">Bridal Hair</div>
+        <div class="hcard-desc">Updo, extensions & styling for your perfect day</div>
+        <div class="hcard-price">From PKR 8,000</div>
+      </div>
+    </div>
+    <div class="hcard short reveal d1">
+      <img src="https://images.unsplash.com/photo-1582095133179-bfd08e2fb6b8?w=500&q=80" alt="Hair cut styling">
+      <div class="hcard-overlay"></div>
+      <div class="hcard-content">
+        <div class="hcard-name">Cut & Style</div>
+        <div class="hcard-desc">Precision cuts by master stylists, shaped for you</div>
+        <div class="hcard-price">From PKR 2,000</div>
+      </div>
+    </div>
+    <div class="hcard short reveal d2">
+      <img src="https://images.unsplash.com/photo-1634449571010-02389ed0f9b0?w=500&q=80" alt="Hair spa treatment">
+      <div class="hcard-overlay"></div>
+      <div class="hcard-content">
+        <div class="hcard-name">Hair Spa & Repair</div>
+        <div class="hcard-desc">Deep conditioning, olaplex & restoration treatments</div>
+        <div class="hcard-price">From PKR 3,500</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAILS SECTION -->
+<div class="nails-sec" id="nails">
+  <div class="reveal">
+    <div class="tag">Spotlight — Nails</div>
+    <h2 class="sh">Details that make<br>the <em>difference</em></h2>
+  </div>
+  <div class="nails-layout" style="margin-top:3.5rem">
+    <div class="nails-img-grid reveal">
+      <div class="nail-img-wrap">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80" alt="Gel nail art">
+        <div class="nail-label">Gel Art</div>
+      </div>
+      <div class="nail-img-wrap">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80&sat=-50&bri=10" alt="French manicure">
+        <div class="nail-label">French</div>
+      </div>
+      <div class="nail-img-wrap">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80&hue=200" alt="Ombre nails">
+        <div class="nail-label">Ombre</div>
+      </div>
+      <div class="nail-img-wrap">
+        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&q=80&bri=-20" alt="Nail extensions">
+        <div class="nail-label">Extensions</div>
+      </div>
+    </div>
+    <div class="nails-menu reveal d1">
+      <div class="nm-item">
+        <div class="nm-row"><span class="nm-name">Gel Manicure</span><span class="nm-price">PKR 2,500+</span></div>
+        <p class="nm-desc">Long-lasting colour on natural nails. Chip-resistant for up to 3 weeks. Available in 200+ shades.</p>
+      </div>
+      <div class="nm-item">
+        <div class="nm-row"><span class="nm-name">Acrylic Extensions</span><span class="nm-price">PKR 4,500+</span></div>
+        <p class="nm-desc">Sculpted to your desired length — square, almond, coffin, or stiletto. Strong and beautiful.</p>
+      </div>
+      <div class="nm-item">
+        <div class="nm-row"><span class="nm-name">Custom Nail Art</span><span class="nm-price">PKR 500+ per nail</span></div>
+        <p class="nm-desc">Minimalist line art to intricate 3D florals and rhinestone embellishments. Wearable masterpieces.</p>
+      </div>
+      <div class="nm-item">
+        <div class="nm-row"><span class="nm-name">Luxury Spa Pedicure</span><span class="nm-price">PKR 2,000+</span></div>
+        <p class="nm-desc">Foot soak, exfoliation, cuticle care, callus removal, massage, and polish — a complete ritual.</p>
+      </div>
+      <div class="nm-item">
+        <div class="nm-row"><span class="nm-name">French & Ombre</span><span class="nm-price">PKR 3,000+</span></div>
+        <p class="nm-desc">Timeless French tips and soft gradient fades — eternally elegant, precisely crafted.</p>
+      </div>
+      <div class="nm-item">
+        <div class="nm-row"><span class="nm-name">Bridal Nail Package</span><span class="nm-price">PKR 8,000+</span></div>
+        <p class="nm-desc">Extensions + custom bridal art + rhinestones + mehndi-inspired designs + spa pedicure.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- OTHER SERVICES -->
+<div class="other-sec" id="spa">
+  <div class="reveal">
+    <div class="tag">More Services</div>
+    <h2 class="sh">Complete Beauty <em>Rituals</em></h2>
+  </div>
+  <div class="other-grid">
+    <div class="ocard reveal">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&q=80" alt="Facial treatment">
+      <h3 class="ocard-name">Facials & Skin</h3>
+      <p class="ocard-desc">HydraFacial, brightening, anti-ageing, and deep cleansing facials using SkinCeuticals and La Mer.</p>
+      <div class="ocard-price">From PKR 3,500</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal d1">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?w=400&q=80" alt="Eyebrow threading">
+      <h3 class="ocard-name">Threading & Waxing</h3>
+      <p class="ocard-desc">Precision eyebrow shaping, facial threading, and full-body waxing. Painless, swift, flawless.</p>
+      <div class="ocard-price">From PKR 300</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal d2">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1519415943484-9fa1873496d4?w=400&q=80" alt="Eyelash extensions">
+      <h3 class="ocard-name">Lash Extensions</h3>
+      <p class="ocard-desc">Silk, mink & volume lash sets. Classic, hybrid, mega volume, Russian & cat-eye mapping.</p>
+      <div class="ocard-price">From PKR 4,000</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal d3">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1457972729786-0411a3b2b626?w=400&q=80" alt="Bridal package">
+      <h3 class="ocard-name">Bridal Packages</h3>
+      <p class="ocard-desc">Complete shaadi-ready packages — makeup, hair, nails, skin prep, and trial sessions included.</p>
+      <div class="ocard-price">From PKR 35,000</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=400&q=80" alt="Body treatment spa">
+      <h3 class="ocard-name">Body Treatments</h3>
+      <p class="ocard-desc">Full body scrubs, tan removal, whitening treatments, and nourishing body wraps for glowing skin.</p>
+      <div class="ocard-price">From PKR 4,000</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal d1">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1583416750470-965b2707b355?w=400&q=80" alt="Eyebrow tinting">
+      <h3 class="ocard-name">Brow Tinting & Shaping</h3>
+      <p class="ocard-desc">Henna brows, tinting, and lamination for bold, defined, perfectly sculpted brows.</p>
+      <div class="ocard-price">From PKR 800</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal d2">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80" alt="Head massage">
+      <h3 class="ocard-name">Head & Scalp Massage</h3>
+      <p class="ocard-desc">Relaxing scalp massage with argan, coconut, and rosemary oils to stimulate growth and ease tension.</p>
+      <div class="ocard-price">From PKR 1,500</div>
+      <div class="ocard-line"></div>
+    </div>
+    <div class="ocard reveal d3">
+      <img class="ocard-img" src="https://images.unsplash.com/photo-1583416750470-965b2707b355?w=400&q=80" alt="Pre-wedding ubtan ritual">
+      <h3 class="ocard-name">Pre-Wedding Rituals</h3>
+      <p class="ocard-desc">Doodh mal, ubtan, and traditional rituals blended with modern skincare — the complete bridal glow prep.</p>
+      <div class="ocard-price">From PKR 5,000</div>
+      <div class="ocard-line"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testi-sec">
+  <div class="reveal">
+    <div class="tag">Client Stories</div>
+    <h2 class="sh">What our <em>clients</em> say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-q">"My bridal makeup was absolutely breathtaking. The artist understood my vision perfectly — I felt like a queen all day and every photo looks magazine-worthy."</p>
+      <div class="tcard-author">
+        <img class="tcard-av" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=80&q=80" alt="Fatima">
+        <div><div class="tcard-name">Fatima Akhtar</div><div class="tcard-loc">Lahore, Pakistan 🇵🇰</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal d1">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-q">"Came for a balayage and left with the most gorgeous hair of my life. The ambiance is pure luxury — staff are warm, skilled, and genuinely passionate."</p>
+      <div class="tcard-author">
+        <img class="tcard-av" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=80&q=80" alt="Sara">
+        <div><div class="tcard-name">Sara Al-Mansouri</div><div class="tcard-loc">Dubai, UAE 🇦🇪</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal d2">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-q">"Finally a salon in London that truly understands South Asian beauty. My lash extensions and nail art received so many compliments — completely obsessed."</p>
+      <div class="tcard-author">
+        <img class="tcard-av" src="https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?w=80&q=80" alt="Priya">
+        <div><div class="tcard-name">Priya Bhattacharya</div><div class="tcard-loc">London, UK 🇬🇧</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-q">"Worth every penny. My keratin treatment has lasted 5 months and my hair has never felt healthier. The consultation was thorough and they truly care about hair health."</p>
+      <div class="tcard-author">
+        <img class="tcard-av" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=80&q=80" alt="Zara">
+        <div><div class="tcard-name">Zara Mohammed</div><div class="tcard-loc">Houston, USA 🇺🇸</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal d1">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-q">"The HydraFacial course completely transformed my skin before my wedding. I followed their recommended skincare plan and glowed radiantly on my big day."</p>
+      <div class="tcard-author">
+        <img class="tcard-av" src="https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=80&q=80" alt="Ayesha">
+        <div><div class="tcard-name">Ayesha Khan</div><div class="tcard-loc">Karachi, Pakistan 🇵🇰</div></div>
+      </div>
+    </div>
+    <div class="tcard reveal d2">
+      <div class="tcard-stars">★★★★★</div>
+      <p class="tcard-q">"The Eid nail art was stunning — 3D florals on almond extensions. Quick, precise, lasted three weeks without a single chip. My absolute go-to in Abu Dhabi."</p>
+      <div class="tcard-author">
+        <img class="tcard-av" src="https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=80&q=80" alt="Nadia">
+        <div><div class="tcard-name">Nadia Rahman</div><div class="tcard-loc">Abu Dhabi, UAE 🇦🇪</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKING -->
+<div class="booking-sec" id="booking">
+  <img class="booking-bg-img" src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1400&q=80" alt="Salon background">
+  <div class="booking-content">
+    <div class="tag" style="justify-content:center">Reserve Your Experience</div>
+    <h2 class="sh">Book Your <em>Transformation</em></h2>
+    <p class="body-text">Step into VELOUR and let our artists create your most beautiful self. Walk-ins welcome — appointments preferred for a fully curated experience.</p>
+    <div class="booking-form">
+      <input class="b-input" type="text" placeholder="Your Full Name">
+      <input class="b-input" type="tel" placeholder="Phone / WhatsApp Number">
+      <select class="b-select">
+        <option value="">Select Service</option>
+        <option>Bridal Makeup Package</option>
+        <option>Party Makeup</option>
+        <option>Hair Cut & Style</option>
+        <option>Balayage / Highlights</option>
+        <option>Keratin Treatment</option>
+        <option>Gel Manicure</option>
+        <option>Nail Extensions + Art</option>
+        <option>Facial / Skin Treatment</option>
+        <option>Lash Extensions</option>
+        <option>Full Bridal Package</option>
+      </select>
+      <select class="b-select">
+        <option value="">Select Location</option>
+        <option>Lahore, Pakistan</option>
+        <option>Karachi, Pakistan</option>
+        <option>Dubai, UAE</option>
+        <option>Abu Dhabi, UAE</option>
+        <option>London, UK</option>
+        <option>New York, USA</option>
+        <option>Houston, USA</option>
+      </select>
+      <button class="btn-book-submit" onclick="alert('Thank you! Our team will confirm your appointment via WhatsApp within 2 hours.')">Request Appointment</button>
+    </div>
+    <p class="book-note">📲 Prefer WhatsApp? Message us directly for instant confirmation</p>
+    <div class="location-row">
+      <div class="loc">
+        <span class="loc-flag">🇵🇰</span>
+        <div class="loc-city">Lahore & Karachi</div>
+        <div class="loc-addr">+92 300 123 4567</div>
+      </div>
+      <div class="loc">
+        <span class="loc-flag">🇦🇪</span>
+        <div class="loc-city">Dubai & Abu Dhabi</div>
+        <div class="loc-addr">+971 50 123 4567</div>
+      </div>
+      <div class="loc">
+        <span class="loc-flag">🇬🇧</span>
+        <div class="loc-city">London</div>
+        <div class="loc-addr">+44 20 7123 4567</div>
+      </div>
+      <div class="loc">
+        <span class="loc-flag">🇺🇸</span>
+        <div class="loc-city">New York & Houston</div>
+        <div class="loc-addr">+1 212 123 4567</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <a href="#" class="footer-brand-logo">VEL<em>OUR</em></a>
+      <p class="footer-desc">Where luxury beauty meets artistry. Serving discerning women across Pakistan, UAE, United Kingdom, and United States with world-class beauty experiences since 2012.</p>
+      <div class="socials">
+        <a href="#" class="soc">ig</a>
+        <a href="#" class="soc">fb</a>
+        <a href="#" class="soc">tk</a>
+        <a href="#" class="soc">wa</a>
+        <a href="#" class="soc">yt</a>
+      </div>
+    </div>
+    <div>
+      <div class="fh">Services</div>
+      <ul class="flinks">
+        <li><a href="#">Makeup Artistry</a></li>
+        <li><a href="#">Hair Studio</a></li>
+        <li><a href="#">Nail Services</a></li>
+        <li><a href="#">Facials & Skin</a></li>
+        <li><a href="#">Lash Extensions</a></li>
+        <li><a href="#">Bridal Packages</a></li>
+        <li><a href="#">Body Treatments</a></li>
+        <li><a href="#">Pre-Wedding Rituals</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Locations</div>
+      <ul class="flinks">
+        <li><a href="#">🇵🇰 Lahore — DHA Phase 5</a></li>
+        <li><a href="#">🇵🇰 Karachi — Clifton</a></li>
+        <li><a href="#">🇦🇪 Dubai — JBR Walk</a></li>
+        <li><a href="#">🇦🇪 Abu Dhabi — Al Maryah</a></li>
+        <li><a href="#">🇬🇧 London — Knightsbridge</a></li>
+        <li><a href="#">🇺🇸 New York — Upper East Side</a></li>
+        <li><a href="#">🇺🇸 Houston — River Oaks</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="fh">Contact</div>
+      <div class="fcontact">
+        <div class="fci"><strong>WhatsApp</strong>+92 300 123 4567 (PK)<br>+971 50 123 4567 (UAE)</div>
+        <div class="fci"><strong>Email</strong>hello@velourbeauty.com</div>
+        <div class="fci"><strong>Hours</strong>Mon – Sat: 10am – 8pm<br>Sunday: 11am – 6pm</div>
+        <div class="fci"><strong>Instagram</strong>@velourbeauty</div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 VELOUR Beauty Atelier. All rights reserved.</p>
+    <p class="footer-copy">Crafted for the modern woman · Pakistan · UAE · UK · USA</p>
+  </div>
+</footer>
+
+<script>
+// Cursor
+const c=document.getElementById('cur'),c2=document.getElementById('cur2');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;c.style.left=mx+'px';c.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;c2.style.left=rx+'px';c2.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.svc,.ocard,.tcard,.hcard,.mf-item,.nm-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{c.style.width='20px';c.style.height='20px';c.style.background='var(--blush)';c2.style.transform='translate(-50%,-50%) scale(1.6)'});
+  el.addEventListener('mouseleave',()=>{c.style.width='8px';c.style.height='8px';c.style.background='var(--champ)';c2.style.transform='translate(-50%,-50%) scale(1)'});
+});
+
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',scrollY>60)});
+
+// Scroll reveal
+const ro=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// 3D tilt
+document.querySelectorAll('.svc,.tcard').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left-r.width/2)*.03;
+    const y=(e.clientY-r.top-r.height/2)*.03;
+    card.style.transform=`perspective(700px) rotateX(${-y}deg) rotateY(${x}deg) translateY(-4px)`;
+  });
+  card.addEventListener('mouseleave',()=>card.style.transform='');
+});
+
+// Hero image parallax
+window.addEventListener('scroll',()=>{
+  const img=document.querySelector('.hero-right img');
+  if(img) img.style.transform=`translateY(${scrollY*.15}px)`;
+});
+</script>
+</body>
+</html>
