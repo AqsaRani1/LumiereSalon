@@ -1,6 +1,6 @@
 # 💄 Luxury Salon Website Template
 
-Live Demo: https://yourlink.github.io/
+Live Demo: https://aqsarani1.github.io/LumiereSalon/
 
 ## Features
 - Modern luxury UI
@@ -19,5 +19,3 @@ Want this for your business?
 - Standard: $60
 - Premium: $120
 
-## ☕ Support
-Buy me a coffee: YOUR_LINK
